@@ -47,7 +47,10 @@ namespace Labo.Application.Services
                 Salt = salt
             });
             // envoyer un email à ce membre
-            mailer.Send(m.Email, "Bienvenue sur le site Labo", $"Votre nom d'utilisateur est {m.Username} et votre mot de passe est {password}");
+            
+            // TODO: Unblock in production mode
+
+            //mailer.Send(m.Email, "Bienvenue sur le site Labo", $"Votre nom d'utilisateur est {m.Username} et votre mot de passe est {password}");
             transactionScope.Complete();
 
             return m;

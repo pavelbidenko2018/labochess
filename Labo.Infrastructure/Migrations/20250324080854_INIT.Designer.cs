@@ -4,6 +4,7 @@ using Labo.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Labo.Infrastructure.Migrations
 {
     [DbContext(typeof(LaboContext))]
-    partial class LaboContextModelSnapshot : ModelSnapshot
+    [Migration("20250324080854_INIT")]
+    partial class INIT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,59 +90,6 @@ namespace Labo.Infrastructure.Migrations
                             Salt = new Guid("00000000-0000-0000-0000-000000000000"),
                             Username = "Checkmate"
                         });
-                });
-
-            modelBuilder.Entity("Labo.Domain.Entities.Tournament", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Adress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CurrentRound")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DeadlineDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("MaxElo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxMembers")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MinElo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinMembers")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("WomenOnly")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tournaments");
                 });
 #pragma warning restore 612, 618
         }
