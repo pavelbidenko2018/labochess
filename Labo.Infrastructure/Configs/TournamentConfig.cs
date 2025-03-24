@@ -23,20 +23,18 @@ namespace Labo.Infrastructure.Configs
         );
 
             builder.ToTable(t =>
-                t.HasCheckConstraint("CK_MAX_MEMBERS", "MaxMembers BETWEEN 0 AND 3000")
+                t.HasCheckConstraint("CK_MAX_MEMBERS", "MaxMembers BETWEEN 2 AND 32")
             );
 
             builder.ToTable(t =>
-                t.HasCheckConstraint("CK_MAX_DEADLINE", "(DeadlineDate > DATEADD(DAY, MinMembers, GETDATE()))")
+                t.HasCheckConstraint("CK_MAX_DEADLINE", "(DeadlineDate >= DATEADD(DAY, MinMembers, GETDATE()))")
        );
 
 
 
             builder.Property(u => u.CurrentRound).HasDefaultValue(0);
 
-            builder.Property(u => u.Status).HasDefaultValue(Status.Pending);
-
-            builder.Property(u => u.DeadlineDate).HasDefaultValue(Status.Pending);
+            builder.Property(u => u.Status).HasDefaultValue(Status.Pending);           
 
         }
     }

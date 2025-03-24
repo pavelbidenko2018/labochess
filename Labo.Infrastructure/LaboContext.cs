@@ -12,6 +12,7 @@ namespace Labo.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new MemberConfig());
+            modelBuilder.ApplyConfiguration(new TournamentConfig());
             
         }
     }

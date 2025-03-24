@@ -4,6 +4,7 @@ using Labo.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Labo.Infrastructure.Migrations
 {
     [DbContext(typeof(LaboContext))]
-    partial class LaboContextModelSnapshot : ModelSnapshot
+    [Migration("20250324095508_FIX_TOURNAMENT_CONSTRAINT")]
+    partial class FIX_TOURNAMENT_CONSTRAINT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,9 +110,7 @@ namespace Labo.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CurrentRound")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DeadlineDate")
                         .HasColumnType("datetime2");
@@ -131,9 +132,7 @@ namespace Labo.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -143,18 +142,7 @@ namespace Labo.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tournaments", t =>
-                        {
-                            t.HasCheckConstraint("CK_MAX_DEADLINE", "(DeadlineDate >= DATEADD(DAY, MinMembers, GETDATE()))");
-
-                            t.HasCheckConstraint("CK_MAX_ELO", "MaxElo BETWEEN 0 AND 3000");
-
-                            t.HasCheckConstraint("CK_MAX_MEMBERS", "MaxMembers BETWEEN 2 AND 32");
-
-                            t.HasCheckConstraint("CK_MIN_ELO", "MinElo BETWEEN 0 AND 3000");
-
-                            t.HasCheckConstraint("CK_MIN_MEMBERS", "MinMembers BETWEEN 2 AND 32");
-                        });
+                    b.ToTable("Tournaments");
                 });
 #pragma warning restore 612, 618
         }

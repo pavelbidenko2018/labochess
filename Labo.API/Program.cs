@@ -25,6 +25,9 @@ builder.Services.AddDbContext<LaboContext>(
 builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 
+builder.Services.AddScoped<ITournamentService, TournamentService>();
+builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
+
 builder.Services.AddScoped(c => new SmtpClient
 {
     Host = builder.Configuration["Smtp:Host"] ?? throw new Exception("Missing Smtp Configuration"),
