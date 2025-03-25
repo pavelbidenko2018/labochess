@@ -41,7 +41,19 @@ builder.Services.AddScoped(c => new SmtpClient
 });
 builder.Services.AddScoped<IMailer, Mailer>();
 
+// CORS CROSS ORIGIN RESOURCE SHARING
+// partage de ressource inter domaine
+
+builder.Services.AddCors(p => {
+    p.AddDefaultPolicy(o =>
+        o.AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin()
+    );
+});
+
 var app = builder.Build();
+app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

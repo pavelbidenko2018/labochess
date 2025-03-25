@@ -28,6 +28,6 @@ namespace Labo.Application.DTO
 
         public bool WomenOnly { get; set; }
                 
-        public DateTime DeadlineDate { get; set; }                
+        public DateTime Deadline { get; set; }                
     }
 }

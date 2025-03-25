@@ -7,17 +7,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Labo.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tournament")]
     [ApiController]
     public class TournamentController(ITournamentService tournamentService) : ControllerBase
     {
 
         [HttpPost]
-        public IActionResult Post([FromBody] RegisterTournamentDTO dto) { 
-    
-            Tournament t = tournamentService.Register(dto);
+        public IActionResult Post([FromBody] RegisterTournamentDTO dto) {
 
-            return Created("tournament/" + t.Id, null);
+            try
+            {
+                Tournament t = tournamentService.Register(dto);
+
+                return Created("tournament/" + t.Id, null);
+            }
+            catch (Exception e)
+            {
+               return Conflict(e.Message);                
+            }
+            
         }
 
 

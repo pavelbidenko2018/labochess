@@ -33,7 +33,7 @@ namespace Labo.Application.Services
                 CurrentRound = 0,
 
                 WomenOnly = dto.WomenOnly,
-                DeadlineDate = dto.DeadlineDate,
+                DeadlineDate = dto.Deadline,
 
                 CreationDate = DateTime.Now,
 
