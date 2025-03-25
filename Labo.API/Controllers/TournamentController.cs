@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Labo.API.Controllers
 {
-    [Route("api/tournament")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TournamentController(ITournamentService tournamentService) : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Labo.API.Controllers
             {
                 Tournament t = tournamentService.Register(dto);
 
-                return Created("tournament/" + t.Id, null);
+                return Created("tournament/" + t.Id, new RegisterTournamentResultDTO(t));
             }
             catch (Exception e)
             {
@@ -28,6 +28,19 @@ namespace Labo.API.Controllers
             
         }
 
+        [HttpGet("all")]
+        public IActionResult GetAll()
+        {
+                List<TournamentResultDTO> result = tournamentService.GetAll();
+                return Ok(result);
+        }
 
+        [HttpDelete("{id}")]
+        public IActionResult Remove([FromRoute] int Id)
+        {
+           bool result = tournamentService.RemoveBy(Id);           
+
+           return result?Ok(result):NoContent();
+        }
     }
 }

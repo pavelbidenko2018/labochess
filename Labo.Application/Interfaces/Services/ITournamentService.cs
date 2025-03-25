@@ -11,5 +11,8 @@ namespace Labo.Application.Interfaces.Services
     public interface ITournamentService
     {
         public Tournament Register(RegisterTournamentDTO dto);
+
+        public List<TournamentResultDTO> GetAll();
+        public bool RemoveBy(int id);
     }
 }

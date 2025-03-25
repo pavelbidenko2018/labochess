@@ -15,6 +15,26 @@ namespace Labo.Application.Services
 {
     public class TournamentService(ITournamentRepository repository) : ITournamentService
     {
+        public List<TournamentResultDTO> GetAll()
+        {
+            return repository.Find().Select(t => new TournamentResultDTO
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Adress = t.Adress,
+                MinMembers = t.MinMembers,
+                MaxMembers = t.MaxMembers,
+                MinElo = t.MinElo,
+                MaxElo = t.MaxElo,
+                Deadline = t.DeadlineDate,
+                Created = t.CreationDate,
+                Updated = t.UpdateDate,
+                Category = t.Category,
+                WomenOnly = t.WomenOnly,
+            }
+            ).ToList();            
+        }
+
         public Tournament Register(RegisterTournamentDTO dto)
         {
             using TransactionScope transactionScope = new();
@@ -44,6 +64,19 @@ namespace Labo.Application.Services
             transactionScope.Complete();
 
             return t;
+        }
+
+        public bool RemoveBy(int id)
+        {
+            Tournament? t = repository.FindOneWhere(t => t.Id == id);
+            if (t is null) {
+                return false;
+            }
+
+            repository.Remove(t);
+
+            return true;
+
         }
     }
 }
