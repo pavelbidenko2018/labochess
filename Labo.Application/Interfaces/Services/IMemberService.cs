@@ -5,6 +5,7 @@ namespace Labo.Application.Interfaces.Services
 {
     public interface IMemberService
     {
-        Member Register(RegisterMemberDTO dto);
+        public bool CheckMember(string email);
+        public Member Register(RegisterMemberDTO dto);
     }
 }

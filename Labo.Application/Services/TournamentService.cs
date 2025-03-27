@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Xml.Linq;
 using Labo.Application.DTO;
+using Labo.Application.Exceptions;
 using Labo.Application.Interfaces.Repositories;
 using Labo.Application.Interfaces.Services;
 using Labo.Domain.Entities;
@@ -17,22 +18,18 @@ namespace Labo.Application.Services
     {
         public List<TournamentResultDTO> GetAll()
         {
-            return repository.Find().Select(t => new TournamentResultDTO
-            {
-                Id = t.Id,
-                Name = t.Name,
-                Adress = t.Adress,
-                MinMembers = t.MinMembers,
-                MaxMembers = t.MaxMembers,
-                MinElo = t.MinElo,
-                MaxElo = t.MaxElo,
-                Deadline = t.DeadlineDate,
-                Created = t.CreationDate,
-                Updated = t.UpdateDate,
-                Category = t.Category,
-                WomenOnly = t.WomenOnly,
-            }
+            return repository.Find().Select(t => convertFromTournament(t)
             ).ToList();            
+        }
+
+        public TournamentResultDTO GetById(int id)
+        {
+            Tournament? t = repository.FindOneWhere(t => t.Id == id);
+            if (t is not null) {
+                return convertFromTournament(t);
+            }
+            else throw new NotFoundException("Tournament");
+            
         }
 
         public Tournament Register(RegisterTournamentDTO dto)
@@ -76,6 +73,25 @@ namespace Labo.Application.Services
             repository.Remove(t);
 
             return true;
+
+        }
+
+        private TournamentResultDTO convertFromTournament(Tournament t) {
+            return new TournamentResultDTO
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Adress = t.Adress,
+                MinMembers = t.MinMembers,
+                MaxMembers = t.MaxMembers,
+                MinElo = t.MinElo,
+                MaxElo = t.MaxElo,
+                Deadline = t.DeadlineDate,
+                Created = t.CreationDate,
+                Updated = t.UpdateDate,
+                Category = t.Category,
+                WomenOnly = t.WomenOnly,
+            };
 
         }
     }

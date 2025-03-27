@@ -16,6 +16,11 @@ namespace Labo.Application.Services
     )
         : IMemberService
     {
+        public bool CheckMember(string email)        {
+            Member? m = memberRepository.FindOneWhere(m => m.Email.Equals(email));
+            return m is not null;              
+        }
+
         public Member Register(RegisterMemberDTO dto)
         {
             // vérifier email unique

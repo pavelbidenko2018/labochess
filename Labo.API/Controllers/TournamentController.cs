@@ -35,6 +35,20 @@ namespace Labo.API.Controllers
                 return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById([FromRoute] int id            )
+        {
+            try
+            {
+                TournamentResultDTO result = tournamentService.GetById(id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Remove([FromRoute] int Id)
         {

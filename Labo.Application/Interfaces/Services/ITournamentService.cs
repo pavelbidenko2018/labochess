@@ -14,5 +14,6 @@ namespace Labo.Application.Interfaces.Services
 
         public List<TournamentResultDTO> GetAll();
         public bool RemoveBy(int id);
+        public TournamentResultDTO GetById(int id);
     }
 }
