@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -16,6 +18,13 @@ namespace Labo.Application.Services
 {
     public class TournamentService(ITournamentRepository repository) : ITournamentService
     {
+
+        private object[] categories = new[] { 
+            new {value = 1},
+            new {value = 2},
+            new {value = 4}
+        };
+
         public List<TournamentResultDTO> GetAll()
         {
             return repository.Find().Select(t => convertFromTournament(t)
@@ -76,6 +85,21 @@ namespace Labo.Application.Services
 
         }
 
+        private Categories[] decodeCategories(int cat) {
+                        
+
+            List<Categories> selectedRoles = new();
+
+            foreach (Categories category in Enum.GetValues(typeof(Categories)))
+            {                
+                if ((cat & (int)category) != 0)
+                {
+                    selectedRoles.Add(category);      
+                }
+            }
+            return selectedRoles.ToArray();
+        }
+
         private TournamentResultDTO convertFromTournament(Tournament t) {
             return new TournamentResultDTO
             {
@@ -88,8 +112,8 @@ namespace Labo.Application.Services
                 MaxElo = t.MaxElo,
                 Deadline = t.DeadlineDate,
                 Created = t.CreationDate,
-                Updated = t.UpdateDate,
-                Category = t.Category,
+                Updated = t.UpdateDate,                
+                Category = decodeCategories((int)t.Category),                
                 WomenOnly = t.WomenOnly,
             };
 

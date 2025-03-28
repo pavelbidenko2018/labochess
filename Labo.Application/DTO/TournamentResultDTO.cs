@@ -20,7 +20,7 @@ namespace Labo.Application.DTO
 
         public int? MaxElo { get; set; }
 
-        public Categories Category { get; set; }
+        public Categories[] Category { get; set; }
 
         public bool WomenOnly { get; set; }
 

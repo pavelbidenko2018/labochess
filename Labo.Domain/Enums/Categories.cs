@@ -8,6 +8,8 @@ namespace Labo.Domain.Enums
 {
     public enum Categories
     {
-        Junior, Senior, Veteran
+        Junior = 1,
+        Senior = 2,        
+        Veteran = 4
     }
 }
