@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.API", "Labo.API\Labo.API.csproj", "{04CF3B46-43B8-4DCD-9148-930773931672}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.Domain", "Labo.Domain\Labo.Domain.csproj", "{E1A76B06-4E3C-49D5-A05D-AF95398313EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.Test", "Labo.Test\Labo.Test.csproj", "{EF54FDF7-484E-494A-95DD-136522F53466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.Azure", "Labo.Azure\Labo.Azure.csproj", "{26E4F677-6E33-4AA2-9C64-8F62614FB9B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EF54FDF7-484E-494A-95DD-136522F53466}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF54FDF7-484E-494A-95DD-136522F53466}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF54FDF7-484E-494A-95DD-136522F53466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26E4F677-6E33-4AA2-9C64-8F62614FB9B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E4F677-6E33-4AA2-9C64-8F62614FB9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E4F677-6E33-4AA2-9C64-8F62614FB9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E4F677-6E33-4AA2-9C64-8F62614FB9B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
